@@ -107,13 +107,6 @@ Estimated energy used: 5.625 Wh                                                 
 ```shell
 docker build --tag 'energy-estimator' .
 ```
-
-## Running tests
-### Unit Tests
-First depending on you operating system run either 
-```shell
-make build-linux
-```
 ```shell
 docker run -it --entrypoint /bin/bash 'energy-estimator'
 5bd7ff64688f:/app# sh start_linux.sh
@@ -133,9 +126,12 @@ Estimated energy used: 5 Wh\n
       > 1544213763
 Estimated energy used: 5.625
 ```
-
-
-
+## Running tests
+### Unit Tests
+First depending on you operating system run either 
+```shell
+make build-linux
+```
 or 
 
 ```shell
