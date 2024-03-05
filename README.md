@@ -103,6 +103,10 @@ Estimated energy used: 5 Wh
 Estimated energy used: 5.625 Wh                                                                                                                     ➜  energy-estimator git:(master) ✗ 
 
 ```
+### Docker Container
+```shell
+docker build --tag 'energy-estimator' .
+```
 
 ## Running tests
 ### Unit Tests
@@ -110,6 +114,27 @@ First depending on you operating system run either
 ```shell
 make build-linux
 ```
+```shell
+docker run -it --entrypoint /bin/bash 'energy-estimator'
+5bd7ff64688f:/app# sh start_linux.sh
+start_linux.sh: line 4: make: not found
+./energy-estimator <<EOF
+      1544206562 TurnOff
+      1544206563 Delta +0.5
+      1544213763 TurnOff
+      EOF
+Estimated energy used: 5 Wh\n
+./energy-estimator <<EOF
+      > 1544206562 TurnOff
+      > 1544206563 Delta +0.5
+      > 1544210163 Delta -0.25
+      > 1544210163 Delta -0.25
+      > 1544211963 Delta +0.75
+      > 1544213763
+Estimated energy used: 5.625
+```
+
+
 
 or 
 
@@ -193,3 +218,8 @@ ok      energy-estimator/integration-test       (cached)
 `/storage`: in app memory storage solution for deduping and keeping track of the messages
 
 `/processor`: core logic around message processing and input parsing
+
+## Future considerations
+* More robust handling of repeated std input payloads. Let's say we run the same command with the same args/payload multiple times, we might want to cache the response temporarily for a limited time and return the estimated energy that was already calculated.
+* Better deduping by checking hashes of message payloads and making logical decisions around what if two messages have the same epcohTS but different delta values. We should discard the second one.
+* How to deploy this to a production environment? Possibly creating a brew tap from a git repository, pushing binaries + scripts to access controlled s3 bucket.
