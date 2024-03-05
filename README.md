@@ -120,22 +120,10 @@ make build-macos
 then 
 
 ```shell
-➜  energy-estimator ✗ make unit-test
+➜  energy-estimator ✗ make unit-test                                                              
 Running unit tests
-go test -v energy-estimator/cmd/energy-estimator energy-estimator/integration-test energy-estimator/processor energy-estimator/storage -race
+go test -v energy-estimator/cmd/energy-estimator energy-estimator/processor energy-estimator/storage -race
 ?       energy-estimator/cmd/energy-estimator   [no test files]
-=== RUN   TestCLIIntegration
-=== RUN   TestCLIIntegration/Estimated_energy_of_2.5_Wh
-=== RUN   TestCLIIntegration/Estimated_energy_of_5.625_Wh
-=== RUN   TestCLIIntegration/Input_/_messages_are_multi_line
-=== RUN   TestCLIIntegration/Input_/_messages_are_multi_line#01
---- PASS: TestCLIIntegration (0.04s)
-    --- PASS: TestCLIIntegration/Estimated_energy_of_2.5_Wh (0.02s)
-    --- PASS: TestCLIIntegration/Estimated_energy_of_5.625_Wh (0.01s)
-    --- PASS: TestCLIIntegration/Input_/_messages_are_multi_line (0.01s)
-    --- PASS: TestCLIIntegration/Input_/_messages_are_multi_line#01 (0.01s)
-PASS
-ok      energy-estimator/integration-test       (cached)
 === RUN   Test_sanitizeInput
 === RUN   Test_sanitizeInput/successfully_sanitizes_input_when_line_is_complete
 === RUN   Test_sanitizeInput/successfully_sanitizes_input_when_line_is_incomplete
@@ -169,6 +157,7 @@ ok      energy-estimator/processor      (cached)
 PASS
 ok      energy-estimator/storage        (cached)
 ➜  energy-estimator ✗ 
+ 
 ```
 ### Integration Tests
 ```shell
@@ -197,7 +186,7 @@ ok      energy-estimator/integration-test       (cached)
 ```
 
 ## Packages
-`/.integration_test`: intergration tests run by using the os.exec go packages functionality
+`/integration_test`: intergration tests run by using the os.exec go packages functionality
 
 `/cmd`: main.go + setup directly related to logging and ingestion of stdin messages
 
